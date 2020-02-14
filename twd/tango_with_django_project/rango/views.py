@@ -19,9 +19,10 @@ def index(request):
 	return render(request, 'rango/index.html', context=context_dict)
 
 def about(request):
-	context_dict = {'boldmessage': 'This tutorial has been put together by '}
-
-	return render(request, 'rango/about.html', context=context_dict)
+	#context_dict = {'boldmessage': 'This tutorial has been put together by '}
+	print(request.method)
+	print(request.user)
+	return render(request, 'rango/about.html', {})
 
 def show_category(request, category_name_slug):
 
@@ -51,7 +52,7 @@ def add_category(request):
 		if form.is_valid():
 			form.save(commit=True)
 
-			return redirect('/rango/')
+			return redirect(reverse('rango:add_category'))
 		else:
 			print(form.errors)
 
